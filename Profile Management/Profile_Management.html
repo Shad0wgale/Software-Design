@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1">
+		<title>Profile Manager</title>
+
+        <link href="Profile_Management.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multidatespicker/1.6.6/jquery-ui.multidatespicker.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+        <script>
+            $(document).ready(function() {
+                $('#datePick').multiDatesPicker({
+                    dateFormat: "yy-mm-dd" // Change date format as needed
+                });
+            });
+        </script>
+        <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+        }
+        body {
+            margin: 0;
+            padding: 15px;
+            background-image: url('Ocean.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 100px auto;
+            padding: 40px 40px 60px;
+            max-width: 500px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form h1 {
+            margin: 10px 0 5px;
+            font-size: 24px;
+            font-weight: 500;
+            color: #474b50;
+        }
+        form label {
+            margin: 25px 0 10px;
+            font-weight: 500;
+            color: #474b50;
+        }
+        </style>
+	</head>
+	<body>
+        <form>
+            <h1>Profile Manager</h1>
+            
+            <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" maxlength="50" required>
+
+                <label for="address1">Address 1</label>
+                <input type="text" id="address1" name="address1" maxlength="100" required>
+
+                <label for="address2">Address 2</label>
+                <input type="text" id="address2" name="address2" maxlength="100">
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" maxlength="100" required>
+
+                <label for="state">State</label>
+                <select id="state" name="state" required>
+                    <option value="Select">Select State</option>
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AZ">AZ</option>
+                    <option value="AR">AR</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DE">DE</option>
+                    <option value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="IA">IA</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="ME">ME</option>
+                    <option value="MD">MD</option>
+                    <option value="MA">MA</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MS">MS</option>
+                    <option value="MO">MO</option>
+                    <option value="MT">MT</option>
+                    <option value="NE">NE</option>
+                    <option value="NV">NV</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NY">NY</option>
+                    <option value="NC">NC</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="VI">VI</option>
+                    <option value="WA">WA</option>
+                    <option value="WV">WV</option>
+                    <option value="WI">WI</option>
+                    <option value="WY">WY</option>
+                </select>
+
+                <label for="zip_code">Zip code</label>
+                <input type="text" id="zip_code" name="zip_code" minlength="5" maxlength="9" pattern="[0-9]{5,9}" required>
+
+                <label for="preferences">Preferences</label>
+                <textarea id="preferences" name="preferences" rows="4" maxlength="1000"></textarea>
+
+                <label for="availability">Availability</label>
+                <input type="text" id="datePick">
+
+                <label for="fruits">Skills</label>
+                <select id="fruits" name="fruits" data-placeholder="Select skills" multiple data-multi-select>
+                    <option value="Communication skills">Communication skills</option>
+                    <option value="Problem-solving">Problem-solving</option>
+                    <option value="Critical thinking">Critical thinking</option>
+                    <option value="Time management">Time management</option>
+                    <option value="Teamwork">Teamwork</option>
+                    <option value="Leadership">Leadership</option>
+                    <option value="Adaptability">Adaptability</option>
+                    <option value="Creativity">Creativity</option>
+                    <option value="Decision-making">Decision-making</option>  
+                    <option value="Emotional intelligence">Emotional intelligence</option>  
+                    <option value="Stress management">Stress management</option>  
+                    <option value="Negotiation">Negotiation</option>  
+                    <option value="Conflict resolution">Conflict resolution</option>  
+                    <option value="Active listening">Active listening</option>  
+                    <option value="Organization">Organization</option>  
+                    <option value="Networking">Networking</option>  
+                    <option value="Research skills">Research skills</option>  
+                    <option value="Presentation skills">Presentation skills</option>  
+                    <option value="Customer service">Customer service</option>  
+                    <option value="Financial literacy">Financial literacy</option>  
+                    <option value="Project management">Project management</option>  
+                    <option value="Analytical skills">Analytical skills</option>  
+                    <option value="Strategic thinking">Strategic thinking</option>  
+                    <option value="Coding and programming">Coding and programming</option>  
+                    <option value="Data analysis">Data analysis</option>  
+                    <option value="Public speaking">Public speaking</option>  
+                    <option value="Interpersonal skills">Interpersonal skills</option>  
+                    <option value="Coaching and mentoring">Coaching and mentoring</option>  
+                    <option value="Multitasking">Multitasking</option>  
+                    <option value="Goal setting">Goal setting</option>  
+                    <option value="Risk management">Risk management</option>  
+                    <option value="Self-discipline">Self-discipline</option>  
+                    <option value="Technical skills">Technical skills</option>  
+                    <option value="Language proficiency">Language proficiency</option>  
+                    <option value="Innovation">Innovation</option>  
+                    <option value="Decision-making">Decision-making</option>  
+                    <option value="Conflict management">Conflict management</option>  
+                    <option value="Cultural awareness">Cultural awareness</option>  
+                    <option value="Persuasion">Persuasion</option>  
+                    <option value="Problem sensitivity">Problem sensitivity</option>  
+                    <option value="Learning agility">Learning agility</option>  
+                    <option value="Digital literacy">Digital literacy</option>  
+                    <option value="Self-motivation">Self-motivation</option>  
+                    <option value="Flexibility">Flexibility</option>  
+                    <option value="Attention to detail">Attention to detail</option>  
+                    <option value="Entrepreneurship">Entrepreneurship</option>  
+                    <option value="Systems thinking">Systems thinking</option>  
+                    <option value="Tolerance for ambiguity">Tolerance for ambiguity</option>  
+                    <option value="Resilience">Resilience</option>  
+                    <option value="Continuous learning">Continuous learning</option>
+                </select>
+                <br>
+                <button type="submit">Save</button>
+        </form>
+        <script src="Profile_Management.js"></script>
+        <script>
+        new MultiSelect('#dynamic', {
+            data: [
+                {
+                    value: 'opt1',
+                    text: 'Option 1'
+                },
+                {
+                    value: 'opt2',
+                    html: '<strong>Option 2 with HTML!</strong>'
+                },
+                {
+                    value: 'opt3',
+                    text: 'Option 3',
+                    selected: true
+                },
+                {
+                    value: 'opt4',
+                    text: 'Option 4'
+                },
+                {
+                    value: 'opt5',
+                    text: 'Option 5'
+                }
+            ],
+            placeholder: 'Select an option',
+            search: true,
+            selectAll: true,
+            listAll: false,
+            max: 2,
+            onChange: function(value, text, element) {
+                console.log('Change:', value, text, element);
+            },
+            onSelect: function(value, text, element) {
+                console.log('Selected:', value, text, element);
+            },
+            onUnselect: function(value, text, element) {
+                console.log('Unselected:', value, text, element);
+            }
+        });
+        </script>
+    </body>
+</html>
