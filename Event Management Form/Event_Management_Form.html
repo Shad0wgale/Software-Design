@@ -1,49 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Management Form</title>
-    <div class="form-container">
-        <h2>Event Management Form</h2>
-        <form action="/submit_form" method="post">
-            <label for="eventname">Event Name</label>
-            <input type="text" id="eventname" name="eventname" placeholder="Name of your event" maxlength="100" required>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,minimum-scale=1">
+		<title>Event Management Form</title>
+
+        <link href="Event_Management.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multidatespicker/1.6.6/jquery-ui.multidatespicker.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+        <script>
+            $(document).ready(function() {
+                $('#datePick').multiDatesPicker({
+                    dateFormat: "yy-mm-dd" // Change date format as needed
+                });
+            });
+        </script>
+        <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+        }
+        body {
+            margin: 0;
+            padding: 15px;
+            background-image: url('volunteer.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 100px auto;
+            padding: 40px 40px 60px;
+            max-width: 500px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form h1 {
+            margin: 10px 0 5px;
+            font-size: 24px;
+            font-weight: 500;
+            color: #474b50;
+        }
+        form label {
+            margin: 25px 0 10px;
+            font-weight: 500;
+            color: #474b50;
+        }
+        </style>
+	</head>
+	<body>
+        <form>
+            <h1>Event Management Form</h1>
             
-            <label for="eventdescription">Event Description</label>
-            <textarea id="eventdescription" name="eventdescription" placeholder="Write a description for your event.." style="height:200px" required></textarea>
+                <label for="event_name">Name of your event</label>
+                <input type="text" id="event_name" name="event_name" maxlength="100" required>
 
-            <label for="location">Location</label>
-            <input type="text" id="location" name="location" placeholder="Location of event" required>
-    
-            <label for="requiredskills">Required Skills</label>
-            <select id="requiredskills" name="requiredskills" multiple size="5">
-                <option value="technology">Technology</option>
-                <option value="science">Science</option>
-                <option value="art">Art</option>
-                <option value="music">Music</option>
-                <option value="sports">Sports</option>
-                <option value="literature">Literature</option>
-                <option value="travel">Travel</option>
-                <option value="food">Food</option>
-            </select>
+                <label for="event_description">Event Description</label>
+                <textarea id="event_description" name="event_description" rows="4" cols="50" required>
+                </textarea>
 
+                <label for="location">Location</label>
+                <textarea id="location" name="location" rows="4" cols="50" required>
+                </textarea>
 
-            <label for="date">Event Date</label>
-            <input type="date" id="date" name="event_date" required>
+                <label for="requiredskills">Required Skills</label>
+                <select id="requiredskills" name="requiredskills" multiple required>
+                    <option value="TX">TX</option>
+                    <option value="AL">AL</option>
+                    <option value="TX">TX</option>
+                    <option value="AL">AL</option>
+                    <option value="TX">TX</option>
+                    <option value="AL">AL</option>
+                    <option value="TX">TX</option>
+                    <option value="AL">AL</option>
+                    <option value="TX">TX</option>
+                    <option value="AL">AL</option>
+                </select>
 
-            <label for="urgency">Urgency</label>
-            <select id="urgency" name="urgency">
-                <option value="australia">Australia</option>
-                <option value="canada">Canada</option>
-                <option value="usa">USA</option>
-            </select>
-    
-            <input type="submit" value="Submit">
+                <label for="urgency">Urgency</label>
+                <select id="urgency" name="urgency" required>
+                    <option value="Select"></option>
+                    <option value="AL">AL</option>
+                </select>
+
+                <label for="event_date">Event Date</label>
+                <input type="date" id="event_date">
+                <br>
+                <button type="submit">Save</button>
         </form>
-    </div>
-</head>
-<body>
-    
-</body>
+        <script src="Event_Management.js"></script>
+        <script>
+        new MultiSelect('#dynamic', {
+            data: [
+                {
+                    value: 'opt1',
+                    text: 'Option 1'
+                },
+                {
+                    value: 'opt2',
+                    html: '<strong>Option 2 with HTML!</strong>'
+                },
+                {
+                    value: 'opt3',
+                    text: 'Option 3',
+                    selected: true
+                },
+                {
+                    value: 'opt4',
+                    text: 'Option 4'
+                },
+                {
+                    value: 'opt5',
+                    text: 'Option 5'
+                }
+            ],
+            placeholder: 'Select an option',
+            search: true,
+            selectAll: true,
+            listAll: false,
+            max: 2,
+            onChange: function(value, text, element) {
+                console.log('Change:', value, text, element);
+            },
+            onSelect: function(value, text, element) {
+                console.log('Selected:', value, text, element);
+            },
+            onUnselect: function(value, text, element) {
+                console.log('Unselected:', value, text, element);
+            }
+        });
+        </script>
+    </body>
 </html>
