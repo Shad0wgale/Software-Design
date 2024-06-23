@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management Form</title>
+    <div class="form-container">
+        <h2>Event Management Form</h2>
+        <form action="/submit_form" method="post">
+            <label for="eventname">Event Name</label>
+            <input type="text" id="eventname" name="eventname" placeholder="Name of your event" maxlength="100" required>
+            
+            <label for="eventdescription">Event Description</label>
+            <textarea id="eventdescription" name="eventdescription" placeholder="Write a description for your event.." style="height:200px" required></textarea>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="Location of event" required>
+    
+            <label for="requiredskills">Required Skills</label>
+            <select id="requiredskills" name="requiredskills" multiple size="5">
+                <option value="technology">Technology</option>
+                <option value="science">Science</option>
+                <option value="art">Art</option>
+                <option value="music">Music</option>
+                <option value="sports">Sports</option>
+                <option value="literature">Literature</option>
+                <option value="travel">Travel</option>
+                <option value="food">Food</option>
+            </select>
+
+
+            <label for="date">Event Date</label>
+            <input type="date" id="date" name="event_date" required>
+
+            <label for="urgency">Urgency</label>
+            <select id="urgency" name="urgency">
+                <option value="australia">Australia</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+            </select>
+    
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</head>
+<body>
+    
+</body>
+</html>
