@@ -1,0 +1,15 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 15px;
+    border-left: 5px solid #001c81;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /*hidden, function will reveal this*/
+  }
+  
