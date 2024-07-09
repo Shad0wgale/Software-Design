@@ -1,3 +1,28 @@
+.header {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .header img {
+    height: 70px;
+    cursor: pointer;
+  }
+  .header nav {
+    margin-left: auto;
+  }
+  .header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 23px;
+  }
+  .header nav a:hover {
+    background-color: gray;
+  }
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
