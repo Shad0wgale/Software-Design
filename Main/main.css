@@ -1,0 +1,27 @@
+body {
+    background-image: url('main.jpg');
+    background-size: cover; /* Ensures the image covers the whole page */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
+    font-family: Arial, sans-serif; /* Example font-family */
+    color: #333; /* Example text color */
+  }
+  
+  #calendar {
+    max-width: 900px;
+    margin: 40px auto; /* Centers the calendar */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 1.0); /* Adds a white background with opacity */
+    border-radius: 10px; /* Rounds the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  }
+  
+  #event-details {
+    max-width: 900px;
+    margin: 20px auto; /* Centers the event details */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 1.0); /* Adds a white background with opacity */
+    border-radius: 10px; /* Rounds the corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  }
+  
