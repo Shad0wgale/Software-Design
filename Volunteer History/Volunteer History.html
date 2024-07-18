@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,minimum-scale=1">
-  <title>Volunteer History</title>
-  <link href="volunteer_history.css" rel="stylesheet" type="text/css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <title>Volunteer History</title>
+    <link href="volunteer_history.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<header class="header">
-  <a href="/Main/main.html">
-      <img src="Volunteer Logo.png" alt="Logo">
-  </a>
-  <nav>
-      <a href="/Profile Management/Profile_Management.html">Profile Management</a>
-      <a href="/Volunteer History/Volunteer History.html">Volunteer History</a>
-  </nav>
-</header>
 <body>
-  <table id="volunteer-history-table">
-    <thead>
-      <tr>
-        <th>Event Name</th>
-        <th>Date</th>
-        <th>Location</th>
-        <th>Description</th>
-        <th>Participation Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><input type="text" id="event-name-1" placeholder="Event Name"></td>
-        <td><input type="text" id="date-1" placeholder="Date"></td>
-        <td><input type="text" id="location-1" placeholder="Location"></td>
-        <td><input type="text" id="description-1" placeholder="Description"></td>
-        <td><input type="text" id="status-1" placeholder="Status"></td>
-      </tr>
-      <tr>
-        <td><input type="text" id="event-name-2" placeholder="Event Name"></td>
-        <td><input type="text" id="date-2" placeholder="Date"></td>
-        <td><input type="text" id="location-2" placeholder="Location"></td>
-        <td><input type="text" id="description-2" placeholder="Description"></td>
-        <td><input type="text" id="status-2" placeholder="Status"></td>
-      </tr>
-      <!-- Add more rows as needed -->
-    </tbody>
-  </table>
-  <script src="volunteer_history.js"></script>
+    <table id="volunteer-history-table">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Participation Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Community Clean-Up</td>
+                <td>2023-05-20</td>
+                <td>City Park</td>
+                <td>A clean-up event for the local park.</td>
+                <td>Participated</td>
+            </tr>
+            <tr>
+                <td>Food Drive</td>
+                <td>2023-06-15</td>
+                <td>Community Center</td>
+                <td>Collecting food for the needy.</td>
+                <td>Did not participate</td>
+            </tr>
+            <tr>
+                <td>Tree Planting</td>
+                <td>2023-07-10</td>
+                <td>National Forest</td>
+                <td>Planting trees to help reforest the area.</td>
+                <td>Participated</td>
+            </tr>
+            <tr>
+                <td>Beach Cleanup</td>
+                <td>2023-08-25</td>
+                <td>Sandy Beach</td>
+                <td>Cleaning up trash and debris from the beach.</td>
+                <td>Participated</td>
+            </tr>
+            <tr>
+                <td>Animal Shelter Volunteering</td>
+                <td>2023-09-05</td>
+                <td>Animal Shelter</td>
+                <td>Helping out at the local animal shelter.</td>
+                <td>Did not participate</td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="volunteer_history.js"></script>
 </body>
-
 </html>
