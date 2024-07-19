@@ -26,6 +26,18 @@
         <input type="text" id="matched-event" name="matched-event" required readonly>
 
         <button type="submit">Save</button>
+        <button onclick="sendEmail()" class="email-button">Send Email</button>
+
+        <script>
+            function sendEmail() {
+                const recipient = 'recipient@example.com';
+                const subject = 'Subject Here';
+                const body = 'Message Here';
+    
+                window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            }
+        </script>
+        
     </form>
     <script src="Volunteer Matching.js"></script>
 </body>
