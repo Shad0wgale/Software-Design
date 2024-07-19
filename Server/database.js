@@ -1,6 +1,5 @@
 const mysql = require("mysql");
 let instance = null;
-require("dotenv").config();
 
 const db = mysql.createConnection({
     host: 'volunteerdb.c2xxqupom1xx.us-east-2.rds.amazonaws.com', 
