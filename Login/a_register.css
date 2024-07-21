@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('Senior-Volunteer.jpg'); /* Set background image */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.border-container {
+    border: 6px solid #000000; /* Thin border */
+    border-radius: 15px; /* Rounded edges */
+    padding: 90px; /* Space inside the border */
+    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent background for contrast */
+    backdrop-filter: blur(5px); /* Apply blur effect */
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px; /* Increase font size for the welcome message */
+    margin-bottom: 40px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    width: 135%;
+    max-width: 400px; /* Set a maximum width for the form elements */
+}
+
+input {
+    width: 100%; /* Make input elements fill the form group's width */
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+input::placeholder {
+    color: #000000; /* Color for the placeholder text */
+    opacity: 1; /* Ensure the placeholder is fully opaque */
+}
+
+button {
+    padding: 15px 30px; /* Increase button padding */
+    font-size: 24px; /* Increase button font size */
+    cursor: pointer;
+    background-color: #007bff;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

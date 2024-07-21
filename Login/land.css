@@ -1,0 +1,68 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('Senior-Volunteer.jpg'); /* Set background image */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.border-container {
+    border: 6px solid #000000; /* Thin border */
+    border-radius: 15px; /* Rounded edges */
+    padding: 20px; /* Space inside the border */
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px); /* Semi-transparent background for contrast */
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px; /* Increase font size for the welcome message */
+    margin-bottom: 40px;
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto); /* Adjust to fit content */
+    gap: 30px; /* Increase gap between buttons */
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: 20px 40px; /* Increase button padding */
+    font-size: 24px; /* Increase button font size */
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    /* Remove default button styling for links */
+    display: inline-block; /* Ensure button size fits content */
+    text-decoration: none; /* Remove underline from links */
+}
+
+button a {
+    color: #fff; /* Text color inside the button */
+    text-decoration: none; /* Remove underline from links */
+    display: block; /* Ensure anchor fills the button */
+    width: 100%; /* Make anchor fill the button's width */
+    height: 100%; /* Make anchor fill the button's height */
+    line-height: 1.5; /* Center text vertically */
+}
+
+button a:hover {
+    color: #fff; /* Ensure text color stays white on hover */
+}
+
+button:hover {
+    background-color: #0056b3; /* Change button color on hover */
+}
