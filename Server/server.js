@@ -72,7 +72,7 @@ app.post('/registervolunteer', (req, res) => {
             console.error('Database query error:', err);
             return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
         }
-        console.log('Admin registration successful:', results);
+        console.log('Volunteer registration successful:', results);
         res.json({ success: true, message: 'Registration successful!' });
     });
 });
@@ -129,6 +129,18 @@ app.post('/loginvolunteer', (req, res) => {
     });
 });
 
+// Handle volunteer history fetching
+app.get('/api/volunteer-history', (req, res) => {
+    const sql = 'SELECT * FROM volunteer_history';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+        res.json(results);
+    });
+});
+
 // Handle errors
 app.use((err, req, res, next) => {
     console.error('Unhandled error:', err);
@@ -138,3 +150,5 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
+
+module.exports = app;
