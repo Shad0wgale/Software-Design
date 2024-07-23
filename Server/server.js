@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
-const port = 3011;
+const port = 3003;
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -19,6 +19,18 @@ app.use(express.static(volunteerMatchingDir));
 const mainDir = path.join(__dirname, '../Main');
 console.log('Serving static files from:', mainDir);
 app.use(express.static(mainDir));
+
+const profileManagementDir = path.join(__dirname, '../ProfileManagement');
+console.log('Serving static files from:', profileManagementDir);
+app.use(express.static(profileManagementDir));
+
+const eventManagementDir = path.join(__dirname, '../EventManagementForm');
+console.log('Serving static files from:', eventManagementDir);
+app.use(express.static(eventManagementDir));
+
+const volunteerHistoryDir = path.join(__dirname, '../VolunteerHistory');
+console.log('Serving static files from:', volunteerHistoryDir);
+app.use(express.static(volunteerHistoryDir));
 
 // Database connection
 const db = mysql.createConnection({

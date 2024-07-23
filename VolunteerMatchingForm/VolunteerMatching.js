@@ -47,3 +47,23 @@ function findBestMatch(volunteer) {
 
 module.exports = { findBestMatch, volunteers, events };
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('nav a[href="VolunteerMatching.html"]').addEventListener('click', function(event) {
+      event.preventDefault();
+      window.location.href = 'VolunteerMatching.html';
+    });
+  });
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('nav a[href="Event_Management_Form.html"]').addEventListener('click', function(event) {
+      event.preventDefault();
+      window.location.href = 'Event_Management_Form.html';
+    });
+  });
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('nav a[href="main.html"]').addEventListener('click', function(event) {
+      event.preventDefault();
+      window.location.href = 'main.html';
+    });
+  });
