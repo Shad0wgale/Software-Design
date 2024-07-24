@@ -153,6 +153,19 @@ app.get('/api/volunteer-history', (req, res) => {
     });
 });
 
+// Handle events fetching
+app.get('/api/events', (req, res) => {
+    const sql = 'SELECT title, start, end, description, location, requiredskills, urgency FROM events';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+        res.json(results);
+    });
+});
+
+
 // Handle errors
 app.use((err, req, res, next) => {
     console.error('Unhandled error:', err);
