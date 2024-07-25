@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
-const port = 3003;
+const port = 3008;
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -71,15 +71,15 @@ app.post('/registeradmin', (req, res) => {
 
 // Handle registration for volunteers
 app.post('/registervolunteer', (req, res) => {
-    const { username, email, password } = req.body;
+    const { fullname, username, email, password, address1, address2, city, state, zipcode, preferences, availability, skills } = req.body;
 
-    if (!username || !email || !password) {
+    if (!fullname|| !username || !email || !password || !address1 || !city || !state || !zipcode || !availability || !skills) {
         console.error('Validation error: All fields are required.');
         return res.status(400).json({ success: false, message: 'All fields are required.' });
     }
 
-    const sql = 'INSERT INTO volunteers (username, email, password) VALUES (?, ?, ?)';
-    db.query(sql, [username, email, password], (err, results) => {
+    const sql = 'INSERT INTO volunteer (fullname, username, email, password, address1, address2, city, state, zipcode, preferences, availability, skills) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    db.query(sql, [fullname, username, email, password, address1, address2 || '', city, state, zipcode, preferences || '', availability, skills], (err, results) => {
         if (err) {
             console.error('Database query error:', err);
             return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
@@ -124,7 +124,7 @@ app.post('/loginvolunteer', (req, res) => {
         return res.status(400).json({ success: false, message: 'All fields are required.' });
     }
 
-    const sql = 'SELECT * FROM volunteers WHERE email = ? AND password = ?';
+    const sql = 'SELECT * FROM volunteer WHERE email = ? AND password = ?';
     db.query(sql, [email, password], (err, results) => {
         if (err) {
             console.error('Database query error:', err);

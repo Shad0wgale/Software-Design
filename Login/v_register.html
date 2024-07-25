@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
     <link rel="stylesheet" href="v_register.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
     <div class="border-container">
@@ -12,20 +13,182 @@
             <h1>Register as Volunteer</h1>
             <form id="register-form" class="register-form">
                 <div class="form-group">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <input type="text" id="fullname" name="fullname" placeholder="Full Name *" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="text" id="username" name="username" placeholder="Username *" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <input type="email" id="email" name="email" placeholder="Email (Used for Sign-in) *" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password *" required>
+                </div>
+                <div class="form-group">
+                    <input type="address1" id="address1" name="address1" placeholder="Address 1 *" required>
+                </div>
+                <div class="form-group">
+                    <input type="address2" id="address2" name="address2" placeholder="Address 2">
+                </div>
+                <div class="form-group">
+                    <input type="city" id="city" name="city" placeholder="City *" required>
+                </div>
+                <div class="form-group">
+                    <select type="state" id="state" name="state" placeholder="State *" required>
+                        <option value="Select">Select State *</option>
+                        <option value="AL">AL</option>
+                        <option value="AK">AK</option>
+                        <option value="AZ">AZ</option>
+                        <option value="AR">AR</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="DE">DE</option>
+                        <option value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="IA">IA</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="ME">ME</option>
+                        <option value="MD">MD</option>
+                        <option value="MA">MA</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MS">MS</option>
+                        <option value="MO">MO</option>
+                        <option value="MT">MT</option>
+                        <option value="NE">NE</option>
+                        <option value="NV">NV</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NY">NY</option>
+                        <option value="NC">NC</option>
+                        <option value="ND">ND</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VT">VT</option>
+                        <option value="VA">VA</option>
+                        <option value="VI">VI</option>
+                        <option value="WA">WA</option>
+                        <option value="WV">WV</option>
+                        <option value="WI">WI</option>
+                        <option value="WY">WY</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="zipcode" id="zipcode" name="zipcode" placeholder="Zip Code *" required>
+                </div>
+                <div class="form-group">
+                    <input type="preferences" id="preferences" name="preferences" rows="4" maxlength="1000" placeholder="Preferences">
+                </div>
+                <div class="form-group">
+                    <input type="availability" id="availability" name="availability" placeholder="Availability *" required>
+                </div>
+                <div class="form-group">
+                    <select name="skills" id="skills" placeholder="Skills *" multiple required>
+                    <option value="Communication skills">Communication skills</option>
+                    <option value="Problem-solving">Problem-solving</option>
+                    <option value="Critical thinking">Critical thinking</option>
+                    <option value="Time management">Time management</option>
+                    <option value="Teamwork">Teamwork</option>
+                    <option value="Leadership">Leadership</option>
+                    <option value="Adaptability">Adaptability</option>
+                    <option value="Creativity">Creativity</option>
+                    <option value="Decision-making">Decision-making</option>  
+                    <option value="Emotional intelligence">Emotional intelligence</option>  
+                    <option value="Stress management">Stress management</option>  
+                    <option value="Negotiation">Negotiation</option>  
+                    <option value="Conflict resolution">Conflict resolution</option>  
+                    <option value="Active listening">Active listening</option>  
+                    <option value="Organization">Organization</option>  
+                    <option value="Networking">Networking</option>  
+                    <option value="Research skills">Research skills</option>  
+                    <option value="Presentation skills">Presentation skills</option>  
+                    <option value="Customer service">Customer service</option>  
+                    <option value="Financial literacy">Financial literacy</option>  
+                    <option value="Project management">Project management</option>  
+                    <option value="Analytical skills">Analytical skills</option>  
+                    <option value="Strategic thinking">Strategic thinking</option>  
+                    <option value="Coding and programming">Coding and programming</option>  
+                    <option value="Data analysis">Data analysis</option>  
+                    <option value="Public speaking">Public speaking</option>  
+                    <option value="Interpersonal skills">Interpersonal skills</option>  
+                    <option value="Coaching and mentoring">Coaching and mentoring</option>  
+                    <option value="Multitasking">Multitasking</option>  
+                    <option value="Goal setting">Goal setting</option>  
+                    <option value="Risk management">Risk management</option>  
+                    <option value="Self-discipline">Self-discipline</option>  
+                    <option value="Technical skills">Technical skills</option>  
+                    <option value="Language proficiency">Language proficiency</option>  
+                    <option value="Innovation">Innovation</option>  
+                    <option value="Decision-making">Decision-making</option>  
+                    <option value="Conflict management">Conflict management</option>  
+                    <option value="Cultural awareness">Cultural awareness</option>  
+                    <option value="Persuasion">Persuasion</option>  
+                    <option value="Problem sensitivity">Problem sensitivity</option>  
+                    <option value="Learning agility">Learning agility</option>  
+                    <option value="Digital literacy">Digital literacy</option>  
+                    <option value="Self-motivation">Self-motivation</option>  
+                    <option value="Flexibility">Flexibility</option>  
+                    <option value="Attention to detail">Attention to detail</option>  
+                    <option value="Entrepreneurship">Entrepreneurship</option>  
+                    <option value="Systems thinking">Systems thinking</option>  
+                    <option value="Tolerance for ambiguity">Tolerance for ambiguity</option>  
+                    <option value="Resilience">Resilience</option>  
+                    <option value="Continuous learning">Continuous learning</option>
+                    </select>
+                </div>
+                <div>
+                    * Required
                 </div>
                 <button type="submit">Register</button>
             </form>
             <div id="message"></div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
+    <script>
+        flatpickr("#availability", {
+            mode: "multiple",
+            dateFormat: "Y-m-d",
+            onChange: function(selectedDates, dateStr, instance) {
+                let dates = selectedDates.map(date => instance.formatDate(date, "Y-m-d")).join(", ");
+                document.getElementById("availability").value = dates;
+            }
+        });
+    </script>
+    <script>
+        new MultiSelectTag('skills', {
+            rounded: true,
+            borderColor: '#000000',  // default true     // default false
+            placeholder: 'Skills',  // default Search...
+            tagColor: {
+                textColor: '#000000',
+                borderColor: '#000000',
+                bgColor: '#ffffff',
+        },
+        onChange: function(values) {
+            console.log(values)
+        }
+    })  // id
+    </script>
     <script src="v_register.js"></script>
 </body>
 </html>
+
 

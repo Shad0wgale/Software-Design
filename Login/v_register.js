@@ -1,9 +1,18 @@
 document.getElementById('register-form').addEventListener('submit', async function(event) {
     event.preventDefault();
 
+    const fullname = document.getElementById('fullname').value;
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const address1 = document.getElementById('address1').value;
+    const address2 = document.getElementById('address2').value || '';
+    const city = document.getElementById('city').value;
+    const state = document.getElementById('state').value;
+    const zipcode = document.getElementById('zipcode').value;
+    const preferences = document.getElementById('preferences').value || '';
+    const availability = document.getElementById('availability').value;
+    const skills = document.getElementById('skills').value;
 
     try {
         const response = await fetch('/registervolunteer', {
@@ -11,7 +20,7 @@ document.getElementById('register-form').addEventListener('submit', async functi
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, email, password })
+            body: JSON.stringify({ fullname, username, email, password, address1, address2, city, state, zipcode, preferences, availability, skills})
         });
 
         console.log('Response status:', response.status);
