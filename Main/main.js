@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
+        eventTimeFormat: { // This hides the time from being displayed
+            hour: '2-digit',
+            minute: '2-digit',
+            meridiem: false // Hides AM/PM
+        },
         events: function(fetchInfo, successCallback, failureCallback) {
             console.log('Fetching events...');
             fetch('/api/events')

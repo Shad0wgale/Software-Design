@@ -48,4 +48,9 @@ body {
     border-radius: 10px; /* Rounds the corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
   }
+
+  .fc-event-time {
+    display: none;
+}
+
   
