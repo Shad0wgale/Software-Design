@@ -67,36 +67,79 @@
         <form action="/process_form" method="post">
             <h1>Event Management Form</h1>
             
-            <label for="event_name">Name of your event</label>
-            <input type="text" id="event_name" name="event_name" maxlength="100" required>
-        
-            <label for="event_description">Event Description</label>
-            <textarea id="event_description" name="event_description" rows="4" cols="50" required></textarea>
-        
-            <label for="location">Location</label>
-            <textarea id="location" name="location" rows="4" cols="50" required></textarea>
-        
-            <label for="requiredskills">Required Skills</label>
-            <select id="requiredskills" name="requiredskills" multiple required>
-                <option value="woodworking">Woodworking</option>
-                <option value="carpentry">Carpentry</option>
-                <option value="programming">Programming</option>
-                <option value="cooking">Cooking</option>
-                <option value="outreach">Outreach</option>
-            </select>
-        
-            <label for="urgency">Urgency</label>
-            <select id="urgency" name="urgency" required>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-            </select>
-        
-            <label for="event_date">Event Date</label>
-            <input type="date" id="event_date" name="event_date" required>
-            <br>
-            <button type="submit">Save</button>
+                <label for="event_name">Name of your event</label>
+                <input type="text" id="event_name" name="event_name" maxlength="100" required>
+
+                <label for="event_description">Event Description</label>
+                <textarea id="event_description" name="event_description" rows="4" cols="50" required>
+                </textarea>
+
+                <label for="location">Location</label>
+                <textarea id="location" name="location" rows="4" cols="50" required>
+                </textarea>
+
+                <label for="requiredskills">Required Skills</label>
+                <select id="requiredskills" name="requiredskills" multiple required>
+                    <option value="woodworking">Woodworking</option>
+                    <option value="carpentry">Carpentry</option>
+                    <option value="programming">Programming</option>
+                    <option value="cooking">Cooking</option>
+                    <option value="outreach">Outreach</option>
+                </select>
+
+                <label for="urgency">Urgency</label>
+                <select id="urgency" name="urgency" required>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <label for="event_date">Event Date</label>
+                <input type="date" id="event_date">
+                <br>
+                <button type="submit">Save</button>
         </form>
         <script src="Event_Management.js"></script>
+        <script>
+        new MultiSelect('#dynamic', {
+            data: [
+                {
+                    value: 'opt1',
+                    text: 'Option 1'
+                },
+                {
+                    value: 'opt2',
+                    html: '<strong>Option 2 with HTML!</strong>'
+                },
+                {
+                    value: 'opt3',
+                    text: 'Option 3',
+                    selected: true
+                },
+                {
+                    value: 'opt4',
+                    text: 'Option 4'
+                },
+                {
+                    value: 'opt5',
+                    text: 'Option 5'
+                }
+            ],
+            placeholder: 'Select an option',
+            search: true,
+            selectAll: true,
+            listAll: false,
+            max: 2,
+            onChange: function(value, text, element) {
+                console.log('Change:', value, text, element);
+            },
+            onSelect: function(value, text, element) {
+                console.log('Selected:', value, text, element);
+            },
+            onUnselect: function(value, text, element) {
+                console.log('Unselected:', value, text, element);
+            }
+        });
+        </script>
     </body>
 </html>
