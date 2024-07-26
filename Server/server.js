@@ -165,6 +165,30 @@ app.get('/api/events', (req, res) => {
     });
 });
 
+// Middleware to parse form data
+app.use(express.urlencoded({ extended: true }));
+
+// Handle form submission
+app.post('/process_form', (req, res) => {
+    const eventName = req.body.event_name;
+    const eventDescription = req.body.event_description;
+    const location = req.body.location;
+    const requiredSkills = req.body.requiredskills ? req.body.requiredskills.join(', ') : ''; // Convert array to comma-separated string
+    const urgency = req.body.urgency;
+    const eventDate = req.body.event_date;
+
+    const sql = `INSERT INTO events (title, start, end, description, location, requiredskills, urgency) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const values = [eventName, eventDate, eventDate, eventDescription, location, requiredSkills, urgency];
+
+    connection.query(sql, values, (err, results) => {
+        if (err) {
+            console.error('Error inserting data:', err);
+            res.status(500).send('An error occurred');
+            return;
+        }
+        res.send('New record created successfully');
+    });
+});
 
 // Handle errors
 app.use((err, req, res, next) => {
