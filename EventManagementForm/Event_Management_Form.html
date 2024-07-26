@@ -1,145 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,minimum-scale=1">
-		<title>Event Management Form</title>
-
-        <link href="Event_Management_Form.css" rel="stylesheet" type="text/css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-multidatespicker/1.6.6/jquery-ui.multidatespicker.js"></script>
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-        <script>
-            $(document).ready(function() {
-                $('#datePick').multiDatesPicker({
-                    dateFormat: "yy-mm-dd" // Change date format as needed
-                });
-            });
-        </script>
-        <style>
-        * {
-            box-sizing: border-box;
-            font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            font-size: 16px;
-        }
-        body {
-            margin: 0;
-            padding: 15px;
-            background-image: url('volunteer.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            margin: 100px auto;
-            padding: 40px 40px 60px;
-            max-width: 500px;
-            width: 100%;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        form h1 {
-            margin: 10px 0 5px;
-            font-size: 24px;
-            font-weight: 500;
-            color: #474b50;
-        }
-        form label {
-            margin: 25px 0 10px;
-            font-weight: 500;
-            color: #474b50;
-        }
-        </style>
-	</head>
-    <header class="header">
-        <a href="/Main/main.html">
-            <img src="Volunteer Logo.png" alt="Logo">
-        </a>
-        <nav>
-            <a href="/Event Management Form/Event_Management_Form.html">Event Management</a>
-            <a href="/Volunteer Matching Form/Volunteer Matching.html">Match Volunteers</a>
-        </nav>
-    </header>
-	<body>
-        <form action="/process_form" method="post">
-            <h1>Event Management Form</h1>
-            
-                <label for="event_name">Name of your event</label>
-                <input type="text" id="event_name" name="event_name" maxlength="100" required>
-
-                <label for="event_description">Event Description</label>
-                <textarea id="event_description" name="event_description" rows="4" cols="50" required>
-                </textarea>
-
-                <label for="location">Location</label>
-                <textarea id="location" name="location" rows="4" cols="50" required>
-                </textarea>
-
-                <label for="requiredskills">Required Skills</label>
-                <select id="requiredskills" name="requiredskills" multiple required>
-                    <option value="woodworking">Woodworking</option>
-                    <option value="carpentry">Carpentry</option>
-                    <option value="programming">Programming</option>
-                    <option value="cooking">Cooking</option>
-                    <option value="outreach">Outreach</option>
-                </select>
-
-                <label for="urgency">Urgency</label>
-                <select id="urgency" name="urgency" required>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-
-                <label for="event_date">Event Date</label>
-                <input type="date" id="event_date">
-                <br>
-                <button type="submit">Save</button>
-        </form>
-        <script src="Event_Management.js"></script>
-        <script>
-        new MultiSelect('#dynamic', {
-            data: [
-                {
-                    value: 'opt1',
-                    text: 'Option 1'
-                },
-                {
-                    value: 'opt2',
-                    html: '<strong>Option 2 with HTML!</strong>'
-                },
-                {
-                    value: 'opt3',
-                    text: 'Option 3',
-                    selected: true
-                },
-                {
-                    value: 'opt4',
-                    text: 'Option 4'
-                },
-                {
-                    value: 'opt5',
-                    text: 'Option 5'
-                }
-            ],
-            placeholder: 'Select an option',
-            search: true,
-            selectAll: true,
-            listAll: false,
-            max: 2,
-            onChange: function(value, text, element) {
-                console.log('Change:', value, text, element);
-            },
-            onSelect: function(value, text, element) {
-                console.log('Selected:', value, text, element);
-            },
-            onUnselect: function(value, text, element) {
-                console.log('Unselected:', value, text, element);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="Event_Management_Form.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="border-container">
+        <div class="container">
+            <h1>Register your event here!</h1>
+            <form id="event-form" class="event-form">
+                <div class="form-group">
+                    <input type="text" id="eventname" name="eventname" placeholder="Name of event *" required>
+                </div>
+                <div class="form-group">
+                    <input type="eventdescription" id="eventdescription" name="eventdescription" placeholder="Description of event *" required>
+                </div>
+                <div class="form-group">
+                    <input type="address1" id="address1" name="address1" placeholder="Address 1 *" required>
+                </div>
+                <div class="form-group">
+                    <input type="address2" id="address2" name="address2" placeholder="Address 2 *">
+                </div>
+                <div class="form-group">
+                    <input type="city" id="city" name="city" placeholder="City *" required>
+                </div>
+                <div class="form-group">
+                    <select type="state" id="state" name="state" placeholder="State *" required>
+                        <option value="Select">Select State *</option>
+                        <option value="AL">AL</option>
+                        <option value="AK">AK</option>
+                        <option value="AZ">AZ</option>
+                        <option value="AR">AR</option>
+                        <option value="CA">CA</option>
+                        <option value="CO">CO</option>
+                        <option value="CT">CT</option>
+                        <option value="DE">DE</option>
+                        <option value="FL">FL</option>
+                        <option value="GA">GA</option>
+                        <option value="HI">HI</option>
+                        <option value="ID">ID</option>
+                        <option value="IL">IL</option>
+                        <option value="IN">IN</option>
+                        <option value="IA">IA</option>
+                        <option value="KS">KS</option>
+                        <option value="KY">KY</option>
+                        <option value="LA">LA</option>
+                        <option value="ME">ME</option>
+                        <option value="MD">MD</option>
+                        <option value="MA">MA</option>
+                        <option value="MI">MI</option>
+                        <option value="MN">MN</option>
+                        <option value="MS">MS</option>
+                        <option value="MO">MO</option>
+                        <option value="MT">MT</option>
+                        <option value="NE">NE</option>
+                        <option value="NV">NV</option>
+                        <option value="NH">NH</option>
+                        <option value="NJ">NJ</option>
+                        <option value="NM">NM</option>
+                        <option value="NY">NY</option>
+                        <option value="NC">NC</option>
+                        <option value="ND">ND</option>
+                        <option value="OH">OH</option>
+                        <option value="OK">OK</option>
+                        <option value="OR">OR</option>
+                        <option value="PA">PA</option>
+                        <option value="RI">RI</option>
+                        <option value="SC">SC</option>
+                        <option value="SD">SD</option>
+                        <option value="TN">TN</option>
+                        <option value="TX">TX</option>
+                        <option value="UT">UT</option>
+                        <option value="VT">VT</option>
+                        <option value="VA">VA</option>
+                        <option value="VI">VI</option>
+                        <option value="WA">WA</option>
+                        <option value="WV">WV</option>
+                        <option value="WI">WI</option>
+                        <option value="WY">WY</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="zipcode" id="zipcode" name="zipcode" placeholder="Zip Code *" required>
+                </div>
+                <div class="form-group">
+                    <select name="skills" id="skills" placeholder="Skills *" multiple required>
+                    <option value="Communication skills">Communication skills</option>
+                    <option value="Problem-solving">Problem-solving</option>
+                    <option value="Critical thinking">Critical thinking</option>
+                    <option value="Time management">Time management</option>
+                    <option value="Teamwork">Teamwork</option>
+                    <option value="Leadership">Leadership</option>
+                    <option value="Adaptability">Adaptability</option>
+                    <option value="Creativity">Creativity</option>
+                    <option value="Decision-making">Decision-making</option>  
+                    <option value="Emotional intelligence">Emotional intelligence</option>  
+                    <option value="Stress management">Stress management</option>  
+                    <option value="Negotiation">Negotiation</option>  
+                    <option value="Conflict resolution">Conflict resolution</option>  
+                    <option value="Active listening">Active listening</option>  
+                    <option value="Organization">Organization</option>  
+                    <option value="Networking">Networking</option>  
+                    <option value="Research skills">Research skills</option>  
+                    <option value="Presentation skills">Presentation skills</option>  
+                    <option value="Customer service">Customer service</option>  
+                    <option value="Financial literacy">Financial literacy</option>  
+                    <option value="Project management">Project management</option>  
+                    <option value="Analytical skills">Analytical skills</option>  
+                    <option value="Strategic thinking">Strategic thinking</option>  
+                    <option value="Coding and programming">Coding and programming</option>  
+                    <option value="Data analysis">Data analysis</option>  
+                    <option value="Public speaking">Public speaking</option>  
+                    <option value="Interpersonal skills">Interpersonal skills</option>  
+                    <option value="Coaching and mentoring">Coaching and mentoring</option>  
+                    <option value="Multitasking">Multitasking</option>  
+                    <option value="Goal setting">Goal setting</option>  
+                    <option value="Risk management">Risk management</option>  
+                    <option value="Self-discipline">Self-discipline</option>  
+                    <option value="Technical skills">Technical skills</option>  
+                    <option value="Language proficiency">Language proficiency</option>  
+                    <option value="Innovation">Innovation</option>  
+                    <option value="Decision-making">Decision-making</option>  
+                    <option value="Conflict management">Conflict management</option>  
+                    <option value="Cultural awareness">Cultural awareness</option>  
+                    <option value="Persuasion">Persuasion</option>  
+                    <option value="Problem sensitivity">Problem sensitivity</option>  
+                    <option value="Learning agility">Learning agility</option>  
+                    <option value="Digital literacy">Digital literacy</option>  
+                    <option value="Self-motivation">Self-motivation</option>  
+                    <option value="Flexibility">Flexibility</option>  
+                    <option value="Attention to detail">Attention to detail</option>  
+                    <option value="Entrepreneurship">Entrepreneurship</option>  
+                    <option value="Systems thinking">Systems thinking</option>  
+                    <option value="Tolerance for ambiguity">Tolerance for ambiguity</option>  
+                    <option value="Resilience">Resilience</option>  
+                    <option value="Continuous learning">Continuous learning</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="urgency" name="urgency" required placeholder="Urgency">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="date" id="eventdate" name="eventdate" placeholder="Event Date *" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <div id="message"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@3.1.0/dist/js/multi-select-tag.js"></script>
+    <script>
+        flatpickr("#availability", {
+            mode: "multiple",
+            dateFormat: "Y-m-d",
+            onChange: function(selectedDates, dateStr, instance) {
+                let dates = selectedDates.map(date => instance.formatDate(date, "Y-m-d")).join(", ");
+                document.getElementById("availability").value = dates;
             }
         });
-        </script>
-    </body>
+    </script>
+    <script>
+        new MultiSelectTag('skills', {
+            rounded: true,
+            borderColor: '#000000',  // default true     // default false
+            placeholder: 'Skills',  // default Search...
+            tagColor: {
+                textColor: '#000000',
+                borderColor: '#000000',
+                bgColor: '#ffffff',
+        },
+        onChange: function(values) {
+            console.log(values)
+        }
+    })  // id
+    </script>
+    <script src="Event_Management_Form.js"></script>
+</body>
 </html>
+
+
