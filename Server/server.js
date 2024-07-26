@@ -173,9 +173,24 @@ app.post('/process_form', (req, res) => {
     const eventName = req.body.event_name;
     const eventDescription = req.body.event_description;
     const location = req.body.location;
-    const requiredSkills = req.body.requiredskills ? req.body.requiredskills.join(', ') : ''; // Convert array to comma-separated string
+    let requiredSkills = req.body.requiredskills;
     const urgency = req.body.urgency;
     const eventDate = req.body.event_date;
+
+    // Log and inspect requiredSkills
+    console.log('Required Skills:', requiredSkills);
+    console.log('Type of Required Skills:', typeof requiredSkills);
+
+    // Ensure requiredSkills is an array or handle it accordingly
+    if (Array.isArray(requiredSkills)) {
+        requiredSkills = requiredSkills.join(', '); // Convert array to comma-separated string
+    } else if (typeof requiredSkills === 'string') {
+        // If it's a string, just use it as is or wrap it in an array
+        requiredSkills = requiredSkills; 
+    } else {
+        // Handle unexpected types
+        requiredSkills = '';
+    }
 
     const sql = `INSERT INTO events (title, start, end, description, location, requiredskills, urgency) VALUES (?, ?, ?, ?, ?, ?, ?)`;
     const values = [eventName, eventDate, eventDate, eventDescription, location, requiredSkills, urgency];
