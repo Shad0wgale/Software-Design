@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "start": "node server.js"
   },
   "keywords": [],
@@ -18,15 +18,17 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "jest": "^27.0.6",
-    "jest-environment-jsdom": "^29.7.0",
+    "@babel/core": "^7.24.9",
+    "@babel/preset-env": "^7.25.0",
+    "@testing-library/jest-dom": "^6.4.8",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.0.0",
     "jquery": "^3.6.0",
     "jsdom": "^16.6.0",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
-  },
-    "username": "test",
-    "email": "test@example.com",
-    "password": "password123"
+    "webpack-dev-server": "^5.0.4",
+    "@testing-library/dom": "^7.29.4"
+  }
 }
