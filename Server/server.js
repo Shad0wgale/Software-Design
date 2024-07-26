@@ -89,6 +89,26 @@ app.post('/registervolunteer', (req, res) => {
     });
 });
 
+// Handle registration for events
+app.post('/registerevent', (req, res) => {
+    const { eventname, eventdescription, address1, address2, city, state, zipcode, skills, urgency, eventdate } = req.body;
+
+    if (!eventname || !eventdescription || !address1 || !city || !state || !zipcode || !skills || !urgency || !eventdate) {
+        console.error('Validation error: All fields are required.');
+        return res.status(400).json({ success: false, message: 'All fields are required.' });
+    }
+
+    const sql = 'INSERT INTO events (eventname, eventdescription, address1, address2, city, state, zipcode, skills, urgency, eventdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    db.query(sql, [eventname, eventdescription, address1, address2 || '', city, state, zipcode || '', skills, urgency, eventdate], (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+        console.log('Event registration successful:', results);
+        res.json({ success: true, message: 'Registration successful!' });
+    });
+});
+
 // Handle login for admins
 app.post('/loginadmin', (req, res) => {
     const { email, password } = req.body;
@@ -155,38 +175,28 @@ app.get('/api/volunteer-history', (req, res) => {
 
 // Handle events fetching
 app.get('/api/events', (req, res) => {
-    const sql = 'SELECT title, start, end, description, location, requiredskills, urgency FROM events';
+    const sql = 'SELECT eventname, eventdescription, address1, address2, city, state, zipcode, skills, urgency, eventdate FROM events';
+    
     db.query(sql, (err, results) => {
         if (err) {
             console.error('Database query error:', err);
             return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
         }
-        res.json(results);
-    });
-});
 
-// Middleware to parse form data
-app.use(express.urlencoded({ extended: true }));
+        // Transform data into FullCalendar format
+        const events = results.map(event => ({
+            title: event.eventname,
+            start: event.eventdate,
+            end: event.eventdate,  // Assuming single-day events; adjust if needed
+            extendedProps: {
+                description: event.eventdescription,
+                location: `${event.address1} ${event.address2}, ${event.city}, ${event.state} ${event.zipcode}`,
+                requiredskills: event.skills,
+                urgency: event.urgency
+            }
+        }));
 
-// Handle form submission
-app.post('/process_form', (req, res) => {
-    const eventName = req.body.event_name;
-    const eventDescription = req.body.event_description;
-    const location = req.body.location;
-    const requiredSkills = req.body.requiredskills ? req.body.requiredskills.join(', ') : ''; // Convert array to comma-separated string
-    const urgency = req.body.urgency;
-    const eventDate = req.body.event_date;
-
-    const sql = `INSERT INTO events (title, start, end, description, location, requiredskills, urgency) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    const values = [eventName, eventDate, eventDate, eventDescription, location, requiredSkills, urgency];
-
-    connection.query(sql, values, (err, results) => {
-        if (err) {
-            console.error('Error inserting data:', err);
-            res.status(500).send('An error occurred');
-            return;
-        }
-        res.send('New record created successfully');
+        res.json(events);
     });
 });
 
