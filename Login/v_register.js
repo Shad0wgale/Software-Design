@@ -12,7 +12,8 @@ document.getElementById('register-form').addEventListener('submit', async functi
     const zipcode = document.getElementById('zipcode').value;
     const preferences = document.getElementById('preferences').value || '';
     const availability = document.getElementById('availability').value;
-    const skills = document.getElementById('skills').value;
+    const skills = document.getElementById('skills')
+    const selectedSkills = Array.from(skills.selectedOptions).map(option => option.value);
 
     try {
         const response = await fetch('/registervolunteer', {
@@ -20,7 +21,7 @@ document.getElementById('register-form').addEventListener('submit', async functi
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ fullname, username, email, password, address1, address2, city, state, zipcode, preferences, availability, skills})
+            body: JSON.stringify({ fullname, username, email, password, address1, address2, city, state, zipcode, preferences, availability, skills: selectedSkills })
         });
 
         console.log('Response status:', response.status);

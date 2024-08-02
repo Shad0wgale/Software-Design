@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
-const port = 3008;
+const port = 3009;
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -74,8 +74,10 @@ app.post('/registervolunteer', (req, res) => {
         return res.status(400).json({ success: false, message: 'All fields are required.' });
     }
 
+    const skillsJson = JSON.stringify(skills);
+
     const sql = 'INSERT INTO volunteer (fullname, username, email, password, address1, address2, city, state, zipcode, preferences, availability, skills) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    db.query(sql, [fullname, username, email, password, address1, address2 || '', city, state, zipcode, preferences || '', availability, skills], (err, results) => {
+    db.query(sql, [fullname, username, email, password, address1, address2 || '', city, state, zipcode, preferences || '', availability, skillsJson], (err, results) => {
         if (err) {
             console.error('Database query error:', err);
             return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
