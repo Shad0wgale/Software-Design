@@ -66,4 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
       event.preventDefault();
       window.location.href = 'main.html';
     });
-  });
+
+    document.getElementById('logoutButton').addEventListener('click', function() {
+      // Optional: Clear session storage or cookies here
+      // sessionStorage.clear();
+      // document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      console.log('User logged out');
+    });
+
+});
