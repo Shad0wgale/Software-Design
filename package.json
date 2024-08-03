@@ -14,12 +14,15 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "csv-writer": "^1.6.0",
     "express": "^4.19.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "pdfkit": "^0.15.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.9",
     "@babel/preset-env": "^7.25.0",
+    "@testing-library/dom": "^7.29.4",
     "@testing-library/jest-dom": "^6.4.8",
     "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
@@ -28,7 +31,6 @@
     "jsdom": "^16.6.0",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4",
-    "@testing-library/dom": "^7.29.4"
+    "webpack-dev-server": "^5.0.4"
   }
 }

@@ -1,3 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  padding: 10px 20px;
+  color: #fff;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header img {
+  height: 70px;
+  cursor: pointer;
+}
+
+.header nav {
+  margin-left: auto;
+}
+
+.header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  padding: 10px;
+  font-size: 23px;
+}
+
+.header nav a:hover {
+  background-color: gray;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -5,18 +45,19 @@ body {
   height: 100vh;
   margin: 0;
   font-family: Arial, sans-serif;
-  background-image: url('volunteery.jpg'); /* Set background image */
-  background-size: cover; /* Ensure the image covers the entire background */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-image: url('volunteery.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 100px; /* Adjust padding to accommodate the fixed header */
 }
 
 .border-container {
-  border: 6px solid #000000; /* Thin border */
-  border-radius: 15px; /* Rounded edges */
-  padding: 90px; /* Space inside the border */
-  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent background for contrast */
-  backdrop-filter: blur(5px); /* Apply blur effect */
+  border: 6px solid #000000;
+  border-radius: 15px;
+  padding: 90px;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
 }
 
 .container {
@@ -24,11 +65,11 @@ body {
 }
 
 h1 {
-  font-size: 48px; /* Increase font size for the welcome message */
+  font-size: 48px;
   margin-bottom: 40px;
 }
 
-.register-form {
+.event-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,11 +78,11 @@ h1 {
 .form-group {
   margin-bottom: 20px;
   width: 135%;
-  max-width: 400px; /* Set a maximum width for the form elements */
+  max-width: 400px;
 }
 
-input {
-  width: 100%; /* Make input elements fill the form group's width */
+input, select {
+  width: 100%;
   padding: 10px;
   font-size: 18px;
   border: 1px solid #000000;
@@ -49,13 +90,13 @@ input {
 }
 
 input::placeholder {
-  color: #000000; /* Color for the placeholder text */
-  opacity: 1; /* Ensure the placeholder is fully opaque */
+  color: #000000;
+  opacity: 1;
 }
 
 button {
-  padding: 15px 30px; /* Increase button padding */
-  font-size: 24px; /* Increase button font size */
+  padding: 15px 30px;
+  font-size: 24px;
   cursor: pointer;
   background-color: #007bff;
   color: #000000;
@@ -68,16 +109,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-select {
-  width: 105%; /* Make select elements fill the form group's width */
-  padding: 10px;
-  font-size: 18px;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  background-color: #ffffff;
-  color: #000000;
-}
-
 textarea#preferences {
   resize: none;
   overflow-y: auto;
@@ -85,14 +116,10 @@ textarea#preferences {
 
 .mult-select-tag {
   display: flex;
-  width: 105%;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   position: relative;
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-color: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  --border-color: rgb(0, 0, 0);
-  font-family: Verdana, sans-serif;
 }
 
 .mult-select-tag .wrapper {
@@ -233,8 +260,6 @@ textarea#preferences {
 }
 
 .mult-select-tag .input-container .input::placeholder {
-  color: #000000; /* Color for the placeholder text */
-  opacity: 1; /* Ensure the placeholder is fully opaque */
+  color: #000000;
+  opacity: 1;
 }
-
-

@@ -2,7 +2,10 @@ const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
-const port = 3009;
+const port = 3014;
+const PDFDocument = require('pdfkit');
+const { createObjectCsvWriter } = require('csv-writer');
+const fs = require('fs');
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -27,6 +30,14 @@ app.use(express.static(eventManagementDir));
 const volunteerHistoryDir = path.join(__dirname, '../VolunteerHistory');
 console.log('Serving static files from:', volunteerHistoryDir);
 app.use(express.static(volunteerHistoryDir));
+
+const volunteerListDir = path.join(__dirname, '../VolunteerList');
+console.log('Serving static files from:', volunteerListDir);
+app.use(express.static(volunteerListDir));
+
+const eventsDir = path.join(__dirname, '../Events');
+console.log('Serving static files from:', eventsDir);
+app.use(express.static(eventsDir));
 
 // Database connection
 const db = mysql.createConnection({
@@ -195,6 +206,236 @@ app.get('/api/events', (req, res) => {
         }));
 
         res.json(events);
+    });
+});
+
+app.get('/api/volunteer', (req, res) => {
+    const sql = 'SELECT * FROM volunteer';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+        res.json(results);
+    });
+});
+
+app.get('/volunteer', (req, res) => {
+    res.sendFile(path.join(volunteerPageDir, 'VolunteerList.html'));
+});
+
+function createTableHeaders(doc, headers, startX, startY, columnWidth, rowHeight) {
+    doc.fontSize(10).font('Helvetica-Bold');
+
+    headers.forEach((header, i) => {
+        doc.text(header, startX + i * columnWidth, startY, { width: columnWidth, align: 'left' });
+        doc.rect(startX + i * columnWidth, startY, columnWidth, rowHeight).stroke();
+    });
+}
+
+// Helper function to create table rows
+function createTableRow(doc, row, startX, startY, columnWidth, rowHeight) {
+    doc.fontSize(8).font('Helvetica');
+
+    Object.values(row).forEach((text, i) => {
+        doc.text(String(text), startX + i * columnWidth, startY, { width: columnWidth, align: 'left' });
+        doc.rect(startX + i * columnWidth, startY, columnWidth, rowHeight).stroke();
+    });
+}
+
+// Handle PDF download
+app.get('/api/v_download-pdf', (req, res) => {
+    const sql = 'SELECT * FROM volunteer';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+
+        const doc = new PDFDocument({ size: 'A4', layout: 'landscape' });
+        const filename = 'volunteer.pdf';
+
+        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+        res.setHeader('Content-type', 'application/pdf');
+
+        doc.pipe(res);
+
+        // Define table properties
+        const tableStartX = 10;
+        const tableStartY = 80;
+        const columnWidth = 60;  // Adjusted column width
+        const rowHeight = 40;   // Adjusted row height
+        const headers = ['ID', 'Full Name', 'Username', 'Email', 'Password', 'Address 1', 'Address 2', 'City', 'State', 'Zipcode', 'Preferences', 'Availability', 'Skills'];
+
+        // Table Headers
+        createTableHeaders(doc, headers, tableStartX, tableStartY, columnWidth, rowHeight);
+
+        // Table Rows
+        results.forEach((volunteer, index) => {
+            const rowY = tableStartY + (index + 1) * rowHeight;
+            createTableRow(doc, volunteer, tableStartX, rowY, columnWidth, rowHeight);
+        });
+
+        doc.end();
+    });
+});
+
+app.get('/api/v_download-csv', (req, res) => {
+    const sql = 'SELECT * FROM volunteer';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+
+        const csvWriter = createObjectCsvWriter({
+            path: 'volunteer.csv',
+            header: [
+                { id: 'id', title: 'ID' },
+                { id: 'fullname', title: 'Full Name' },
+                { id: 'username', title: 'Username' },
+                { id: 'email', title: 'Email' },
+                { id: 'password', title: 'Password' },
+                { id: 'address1', title: 'Address 1' },
+                { id: 'address2', title: 'Address 2' },
+                { id: 'city', title: 'City' },
+                { id: 'state', title: 'State' },
+                { id: 'zipcode', title: 'Zipcode' },
+                { id: 'preferences', title: 'Preferences' },
+                { id: 'availability', title: 'Availability' },
+                { id: 'skills', title: 'Skills' },
+            ]
+        });
+
+        csvWriter.writeRecords(results)
+            .then(() => {
+                res.download('volunteer.csv', 'volunteer.csv', (err) => {
+                    if (err) {
+                        console.error('Error downloading CSV:', err);
+                        res.status(500).json({ success: false, message: 'Error downloading CSV.' });
+                    } else {
+                        fs.unlinkSync('volunteer.csv'); // Delete the file after download
+                    }
+                });
+            })
+            .catch(err => {
+                console.error('Error writing CSV:', err);
+                res.status(500).json({ success: false, message: 'Error writing CSV.' });
+            });
+    });
+});
+
+app.get('/api/eventsList', (req, res) => {
+    const sql = 'SELECT * FROM events';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+        res.json(results);
+    });
+});
+
+app.get('/eventsList', (req, res) => {
+    res.sendFile(path.join(eventsPageDir, 'Events.html'));
+});
+
+function createTableHeaders(doc, headers, startX, startY, columnWidth, rowHeight) {
+    doc.fontSize(10).font('Helvetica-Bold');
+
+    headers.forEach((header, i) => {
+        doc.text(header, startX + i * columnWidth, startY, { width: columnWidth, align: 'left' });
+        doc.rect(startX + i * columnWidth, startY, columnWidth, rowHeight).stroke();
+    });
+}
+
+// Helper function to create table rows
+function createTableRow(doc, row, startX, startY, columnWidth, rowHeight) {
+    doc.fontSize(8).font('Helvetica');
+
+    Object.values(row).forEach((text, i) => {
+        doc.text(String(text), startX + i * columnWidth, startY, { width: columnWidth, align: 'left' });
+        doc.rect(startX + i * columnWidth, startY, columnWidth, rowHeight).stroke();
+    });
+}
+
+// Handle PDF download
+app.get('/api/e_download-pdf', (req, res) => {
+    const sql = 'SELECT * FROM events';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+
+        const doc = new PDFDocument({ size: 'A4', layout: 'landscape' });
+        const filename = 'events.pdf';
+
+        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+        res.setHeader('Content-type', 'application/pdf');
+
+        doc.pipe(res);
+
+        // Define table properties
+        const tableStartX = 10;
+        const tableStartY = 80;
+        const columnWidth = 60;  // Adjusted column width
+        const rowHeight = 40;   // Adjusted row height
+        const headers = ['ID', 'Event Name', 'Description', 'Address 1', 'Address 2', 'City', 'State', 'Zipcode', 'Skills', 'Urgency', 'Event Date'];
+
+        // Table Headers
+        createTableHeaders(doc, headers, tableStartX, tableStartY, columnWidth, rowHeight);
+
+        // Table Rows
+        results.forEach((events, index) => {
+            const rowY = tableStartY + (index + 1) * rowHeight;
+            createTableRow(doc, events, tableStartX, rowY, columnWidth, rowHeight);
+        });
+
+        doc.end();
+    });
+});
+
+app.get('/api/e_download-csv', (req, res) => {
+    const sql = 'SELECT * FROM events';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+
+        const csvWriter = createObjectCsvWriter({
+            path: 'events.csv',
+            header: [
+                { id: 'id', title: 'ID' },
+                { id: 'eventname', title: 'Event Name' },
+                { id: 'eventdescription', title: 'Description' },
+                { id: 'address1', title: 'Address 1' },
+                { id: 'address2', title: 'Address 2' },
+                { id: 'city', title: 'City' },
+                { id: 'state', title: 'State' },
+                { id: 'zipcode', title: 'Zipcode' },
+                { id: 'skills', title: 'Skills' },
+                { id: 'urgency', title: 'Urgency' },
+                { id: 'eventdate', title: 'Event Date' },
+            ]
+        });
+
+        csvWriter.writeRecords(results)
+            .then(() => {
+                res.download('events.csv', 'events.csv', (err) => {
+                    if (err) {
+                        console.error('Error downloading CSV:', err);
+                        res.status(500).json({ success: false, message: 'Error downloading CSV.' });
+                    } else {
+                        fs.unlinkSync('events.csv'); // Delete the file after download
+                    }
+                });
+            })
+            .catch(err => {
+                console.error('Error writing CSV:', err);
+                res.status(500).json({ success: false, message: 'Error writing CSV.' });
+            });
     });
 });
 
