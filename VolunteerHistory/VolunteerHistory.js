@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    const volunteerId = 1; // Replace with the actual logged-in volunteer ID
+
     // Fetch volunteer history data from the server
     $.ajax({
         url: '/api/volunteer-history',
@@ -8,7 +10,7 @@ $(document).ready(function() {
             data.forEach(record => {
                 $tbody.append(`
                     <tr>
-                        <td>${record.eventName}</td>
+                        <td>${record.event_name}</td>
                         <td>${record.date}</td>
                         <td>${record.location}</td>
                         <td>${record.description}</td>
@@ -21,25 +23,51 @@ $(document).ready(function() {
             console.error('Error fetching volunteer history:', error);
         }
     });
+
+    // Fetch events for sign-up
+    $.ajax({
+        url: '/api/events',
+        method: 'GET',
+        success: function(data) {
+            const $eventSelect = $('#event-select');
+            data.forEach(event => {
+                $eventSelect.append(`<option value="${event.id}">${event.title}</option>`);
+            });
+        },
+        error: function(error) {
+            console.error('Error fetching events:', error);
+        }
+    });
+
+    // Handle event sign-up form submission
+    $('#signup-form').on('submit', function(e) {
+        e.preventDefault();
+        const eventId = $('#event-select').val();
+        $.ajax({
+            url: '/api/signup-event',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ volunteer_id: volunteerId, event_id: eventId }),
+            success: function(response) {
+                alert(response.message);
+            },
+            error: function(error) {
+                console.error('Error signing up for event:', error);
+            }
+        });
+    });
+
+    // Fetch notifications for the volunteer
+    $.ajax({
+        url: `/api/notifications/${volunteerId}`,
+        method: 'GET',
+        success: function(data) {
+            data.forEach(notification => {
+                alert(notification.message);
+            });
+        },
+        error: function(error) {
+            console.error('Error fetching notifications:', error);
+        }
+    });
 });
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('nav a[href="Profile_Management.html"]').addEventListener('click', function(event) {
-      event.preventDefault();
-      window.location.href = 'Profile_Management.html';
-    });
-  });
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('nav a[href="VolunteerHistory.html"]').addEventListener('click', function(event) {
-      event.preventDefault();
-      window.location.href = 'VolunteerHistory.html';
-    });
-  });
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('nav a[href="main.html"]').addEventListener('click', function(event) {
-      event.preventDefault();
-      window.location.href = 'main.html';
-    });
-  });
