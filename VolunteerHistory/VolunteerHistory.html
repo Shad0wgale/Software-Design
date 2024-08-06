@@ -2,34 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1">
     <title>Volunteer History</title>
-    <link href="VolunteerHistory.css" rel="stylesheet" type="text/css">
+    <link href="volunteer_history.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<header class="header">
-    <a href="main.html">
-        <img src="Volunteer Logo.png" alt="Logo">
-    </a>
-    <nav>
-        <a href="VolunteerHistory.html">Volunteer History</a>
-    </nav>
-</header>
 <body>
-    <table id="volunteer-history-table">
-        <thead>
-            <tr>
-                <th>Event Name</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Participation Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data will be populated here dynamically -->
-        </tbody>
-    </table>
-    <script src="VolunteerHistory.js"></script>
+    <div class="container">
+        <header>Volunteer History</header>
+        <table id="volunteer-history-table">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Participation Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated here dynamically -->
+            </tbody>
+        </table>
+        <h2>Sign Up for Events</h2>
+        <form id="signup-form">
+            <label for="event-select">Choose an event:</label>
+            <select id="event-select" name="event">
+                <!-- Events will be populated here dynamically -->
+            </select>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+    <script src="volunteer_history.js"></script>
 </body>
 </html>
