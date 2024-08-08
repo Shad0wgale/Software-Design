@@ -104,7 +104,7 @@ const eventSelect = document.getElementById('event');
 
 try {
     // Fetch events from the API
-    let response = await fetch('http://localhost:3008/api/events');
+    let response = await fetch('/api/events');
     if (!response.ok) throw new Error('Failed to fetch events');
     let events = await response.json();
 
