@@ -3,10 +3,11 @@ $(document).ready(function() {
 
     // Fetch volunteer history data from the server
     $.ajax({
-        url: '/api/volunteer-history',
+        url: `/api/volunteer-history/${volunteerId}`,
         method: 'GET',
         success: function(data) {
             const $tbody = $('#volunteer-history-table tbody');
+            $tbody.empty(); // Clear existing data
             data.forEach(record => {
                 $tbody.append(`
                     <tr>
@@ -30,6 +31,7 @@ $(document).ready(function() {
         method: 'GET',
         success: function(data) {
             const $eventSelect = $('#event-select');
+            $eventSelect.empty(); // Clear existing options
             data.forEach(event => {
                 $eventSelect.append(`<option value="${event.id}">${event.title}</option>`);
             });
