@@ -20,28 +20,20 @@
     </nav>
 </header>
 <body>
-    <form id="matching-form">
-        <h1>Volunteer Matching Form</h1>
-        <label for="volunteer-name">Volunteer Name</label>
-        <input type="text" id="volunteer-name" name="volunteer-name" required readonly>
+    <h1>Match Volunteers with Events</h1>
+    <form id="matchingForm">
+        <label for="volunteer">Select Volunteer:</label>
+        <select id="volunteer" name="volunteer">
+            <!-- Options will be dynamically loaded -->
+        </select><br><br>
 
-        <label for="matched-event">Matched Event</label>
-        <input type="text" id="matched-event" name="matched-event" required readonly>
+        <label for="event">Select Event:</label>
+        <select id="event" name="event">
+            <!-- Options will be dynamically loaded -->
+        </select><br><br>
 
-        <button type="submit">Save</button>
-        <button onclick="sendEmail()" class="email-button">Send Email</button>
-
-        <script>
-            function sendEmail() {
-                const recipient = 'recipient@example.com';
-                const subject = 'Subject Here';
-                const body = 'Message Here';
-    
-                window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            }
-        </script>
-        
+        <button type="submit">Match Volunteer with Event</button>
     </form>
-    <script src="VolunteerMatching.js"></script>
 </body>
+<script src="VolunteerMatching.js"></script>
 </html>

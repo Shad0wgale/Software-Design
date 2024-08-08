@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const port = 3008;
@@ -11,6 +12,10 @@ const fs = require('fs');
 app.use(express.json());
 
 // Serve static files from the Login directory
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 const loginDir = path.join(__dirname, '../Login');
 console.log('Serving static files from:', loginDir);
 app.use(express.static(loginDir));
@@ -47,6 +52,8 @@ const db = mysql.createConnection({
     password: 'Password1234',
     database: 'VolunteerDB'
 });
+
+
 
 db.connect((err) => {
     if (err) {
@@ -358,6 +365,40 @@ function createTableRow(doc, row, startX, startY, columnWidth, rowHeight) {
         doc.rect(startX + i * columnWidth, startY, columnWidth, rowHeight).stroke();
     });
 }
+
+
+// fetch volunteers
+app.get('/api/volunteers', async (req, res) => {
+    try {
+      const [volunteers] = await db.query('SELECT id, fullname FROM volunteer');
+      res.json(volunteers);
+    } catch (error) {
+      res.status(500).send('Error fetching volunteers');
+    }
+});
+  
+
+
+// fetch events
+app.get('/api/events', async (req, res) => {
+try {
+    const [events] = await db.query('SELECT id, eventname FROM events');
+    res.json(events);
+} catch (error) {
+    res.status(500).send('Error fetching events');
+}
+});
+
+// match volunteers
+app.post('/api/match', async (req, res) => {
+const { volunteerId, eventId } = req.body;
+try {
+    await db.query('INSERT INTO volunteer_event_matches (volunteer_id, event_id) VALUES (?, ?)', [volunteerId, eventId]);
+    res.send('Volunteer matched with event successfully');
+} catch (error) {
+    res.status(500).send('Error matching volunteer with event');
+}
+});
 
 // Handle PDF download
 app.get('/api/e_download-pdf', (req, res) => {
