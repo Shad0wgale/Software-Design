@@ -189,9 +189,10 @@ app.get('/api/volunteer-history', (req, res) => {
     });
 });
 
-// Handle events fetching
+
 app.get('/api/events', (req, res) => {
-    const sql = 'SELECT eventname, eventdescription, address1, address2, city, state, zipcode, skills, urgency, eventdate FROM events';
+    // Update SQL query to include the event id
+    const sql = 'SELECT id, eventname, eventdescription, address1, address2, city, state, zipcode, skills, urgency, eventdate FROM events';
     
     db.query(sql, (err, results) => {
         if (err) {
@@ -199,8 +200,9 @@ app.get('/api/events', (req, res) => {
             return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
         }
 
-        // Transform data into FullCalendar format
+        // Transform data into FullCalendar format and include the event id
         const events = results.map(event => ({
+            id: event.id, // Include the event ID
             title: event.eventname,
             start: event.eventdate,
             end: event.eventdate,  // Assuming single-day events; adjust if needed
@@ -393,7 +395,7 @@ try {
 app.post('/api/match', async (req, res) => {
 const { volunteerId, eventId } = req.body;
 try {
-    await db.query('INSERT INTO volunteer_event_matches (volunteer_id, event_id) VALUES (?, ?)', [volunteerId, eventId]);
+    await db.query('INSERT INTO matches (volunteer_id, event_id) VALUES (?, ?)', [volunteerId, eventId]);
     res.send('Volunteer matched with event successfully');
 } catch (error) {
     res.status(500).send('Error matching volunteer with event');
