@@ -13,7 +13,16 @@
 
         <!-- Section to View History -->
         <h2>View History</h2>
-        
+
+        <!-- Event Selection Dropdown -->
+        <label for="event-select">Choose an event to view its history:</label>
+        <select id="event-select" name="event">
+            <!-- Events will be populated here dynamically -->
+        </select>
+
+        <!-- View History Button -->
+        <button id="view-history-button">View History</button>
+
         <table id="volunteer-history-table">
             <thead>
                 <tr>
@@ -28,9 +37,6 @@
                 <!-- Data will be populated here dynamically -->
             </tbody>
         </table>
-
-        <!-- View History Button -->
-        <button id="view-history-button">View History</button>
     </div>
 
     <script src="volunteer_history.js"></script>
