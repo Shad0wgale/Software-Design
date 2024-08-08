@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for History.js</title>
+    <title>Code coverage report for List.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> History.js</h1>
+        <h1><a href="index.html">All files</a> List.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,14 +32,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -90,66 +90,60 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// History.js
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// List.js
 &nbsp;
-class VolunteerHistory {
-    constructor() {
-        this.history = {}; // Holds volunteer history: { volunteerId: [eventIds] }
-    }
+/**
+ * Displays a list of volunteers on the webpage.
+ * @param {Array} volunteers - Array of volunteer objects.
+ */
+function displayVolunteers(volunteers) {
+    const volunteerListContainer = document.querySelector('#volunteer-list');
+    volunteerListContainer.innerHTML = ''; // Clear any existing content
 &nbsp;
-    // Add an event to a volunteer's history
-    addEvent(volunteerId, eventId) {
-        if (!this.history[volunteerId]) {
-            this.history[volunteerId] = [];
-        }
-        if (!this.history[volunteerId].includes(eventId)) {
-            this.history[volunteerId].push(eventId);
-        }
-    }
+    volunteers.forEach((volunteer, index) =&gt; {
+        const volunteerItem = document.createElement('div');
+        volunteerItem.classList.add('volunteer-item');
 &nbsp;
-    // Get a volunteer's event history
-    getHistory(volunteerId) {
-        return this.history[volunteerId] || [];
-    }
+        volunteerItem.innerHTML = `
+            &lt;p&gt;Name: ${volunteer.name}&lt;/p&gt;
+            &lt;p&gt;Email: ${volunteer.email}&lt;/p&gt;
+            &lt;p&gt;Skills: ${volunteer.skills.join(', ')}&lt;/p&gt;
+            &lt;p&gt;Status: ${volunteer.status}&lt;/p&gt;
+        `;
 &nbsp;
-    // Clear all history (useful for tests)
-    clearHistory() {
-        this.history = {};
-    }
+        volunteerListContainer.appendChild(volunteerItem);
+    });
 }
 &nbsp;
-module.exports = VolunteerHistory;
+// Export the function for use in tests
+module.exports = { displayVolunteers };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
