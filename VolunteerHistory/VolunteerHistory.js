@@ -1,75 +1,37 @@
 $(document).ready(function() {
     const volunteerId = 1; // Replace with the actual logged-in volunteer ID
 
-    // Fetch volunteer history data from the server
-    $.ajax({
-        url: `/api/volunteer-history/${volunteerId}`,
-        method: 'GET',
-        success: function(data) {
-            const $tbody = $('#volunteer-history-table tbody');
-            $tbody.empty(); // Clear existing data
-            data.forEach(record => {
-                $tbody.append(`
-                    <tr>
-                        <td>${record.event_name}</td>
-                        <td>${record.date}</td>
-                        <td>${record.location}</td>
-                        <td>${record.description}</td>
-                        <td>${record.status}</td>
-                    </tr>
-                `);
-            });
-        },
-        error: function(error) {
-            console.error('Error fetching volunteer history:', error);
-        }
-    });
-
-    // Fetch events for sign-up
-    $.ajax({
-        url: '/api/events',
-        method: 'GET',
-        success: function(data) {
-            const $eventSelect = $('#event-select');
-            $eventSelect.empty(); // Clear existing options
-            data.forEach(event => {
-                $eventSelect.append(`<option value="${event.id}">${event.title}</option>`);
-            });
-        },
-        error: function(error) {
-            console.error('Error fetching events:', error);
-        }
-    });
-
-    // Handle event sign-up form submission
-    $('#signup-form').on('submit', function(e) {
-        e.preventDefault();
-        const eventId = $('#event-select').val();
+    // Function to fetch and display volunteer history
+    function fetchVolunteerHistory() {
         $.ajax({
-            url: '/api/signup-event',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ volunteer_id: volunteerId, event_id: eventId }),
-            success: function(response) {
-                alert(response.message);
+            url: `/api/volunteer-history/${volunteerId}`,
+            method: 'GET',
+            success: function(data) {
+                const $tbody = $('#volunteer-history-table tbody');
+                $tbody.empty(); // Clear existing data
+                data.forEach(record => {
+                    $tbody.append(`
+                        <tr>
+                            <td>${record.event_name}</td>
+                            <td>${record.date}</td>
+                            <td>${record.location}</td>
+                            <td>${record.description}</td>
+                            <td>${record.status}</td>
+                        </tr>
+                    `);
+                });
             },
             error: function(error) {
-                console.error('Error signing up for event:', error);
+                console.error('Error fetching volunteer history:', error);
             }
         });
-    });
+    }
 
-    // Fetch notifications for the volunteer
-    $.ajax({
-        url: `/api/notifications/${volunteerId}`,
-        method: 'GET',
-        success: function(data) {
-            data.forEach(notification => {
-                alert(notification.message);
-            });
-        },
-        error: function(error) {
-            console.error('Error fetching notifications:', error);
-        }
+    // Initially fetch volunteer history on page load
+    fetchVolunteerHistory();
+
+    // Refresh history when "View History" button is clicked
+    $('#view-history-button').on('click', function() {
+        fetchVolunteerHistory();
     });
 });
