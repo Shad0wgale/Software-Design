@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-const port = 3009;
+const port = 3011;
 const PDFDocument = require('pdfkit');
 const { createObjectCsvWriter } = require('csv-writer');
 const fs = require('fs');
@@ -43,6 +43,10 @@ app.use(express.static(volunteerListDir));
 const eventsDir = path.join(__dirname, '../Events');
 console.log('Serving static files from:', eventsDir);
 app.use(express.static(eventsDir));
+
+const matchedVolunteersDir = path.join(__dirname, '../MatchedVolunteers');
+console.log('Serving static files from:', matchedVolunteersDir);
+app.use(express.static(matchedVolunteersDir));
 
 // Database connection
 const db = mysql.createConnection({
@@ -349,6 +353,21 @@ app.get('/eventsList', (req, res) => {
     res.sendFile(path.join(eventsPageDir, 'Events.html'));
 });
 
+app.get('/api/matches', (req, res) => {
+    const sql = 'SELECT * FROM matches';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+        res.json(results);
+    });
+});
+
+app.get('/matches', (req, res) => {
+    res.sendFile(path.join(matchesageDir, 'MatchedVolunteer.html'));
+});
+
 function createTableHeaders(doc, headers, startX, startY, columnWidth, rowHeight) {
     doc.fontSize(10).font('Helvetica-Bold');
 
@@ -368,7 +387,76 @@ function createTableRow(doc, row, startX, startY, columnWidth, rowHeight) {
     });
 }
 
+app.get('/api/mv_download-pdf', (req, res) => {
+    const sql = 'SELECT * FROM matches';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
 
+        const doc = new PDFDocument({ size: 'A4', layout: 'landscape' });
+        const filename = 'matchedVolunteer.pdf';
+
+        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+        res.setHeader('Content-type', 'application/pdf');
+
+        doc.pipe(res);
+
+        // Define table properties
+        const tableStartX = 10;
+        const tableStartY = 80;
+        const columnWidth = 60;  // Adjusted column width
+        const rowHeight = 40;   // Adjusted row height
+        const headers = ['ID', 'Volunteer ID', 'Event ID'];
+
+        // Table Headers
+        createTableHeaders(doc, headers, tableStartX, tableStartY, columnWidth, rowHeight);
+
+        // Table Rows
+        results.forEach((events, index) => {
+            const rowY = tableStartY + (index + 1) * rowHeight;
+            createTableRow(doc, events, tableStartX, rowY, columnWidth, rowHeight);
+        });
+
+        doc.end();
+    });
+});
+
+app.get('/api/mv_download-csv', (req, res) => {
+    const sql = 'SELECT * FROM matches';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            return res.status(500).json({ success: false, message: 'Database error.', error: err.sqlMessage });
+        }
+
+        const csvWriter = createObjectCsvWriter({
+            path: 'matchedVolunteer.csv',
+            header: [
+                { id: 'id', title: 'ID' },
+                { id: 'volunteer_id', title: 'Volunteer ID' },
+                { id: 'event_id', title: 'Event ID' },
+            ]
+        });
+
+        csvWriter.writeRecords(results)
+            .then(() => {
+                res.download('matchedVolunteer.csv', 'matchedVolunteer.csv', (err) => {
+                    if (err) {
+                        console.error('Error downloading CSV:', err);
+                        res.status(500).json({ success: false, message: 'Error downloading CSV.' });
+                    } else {
+                        fs.unlinkSync('matchedVolunteer.csv'); // Delete the file after download
+                    }
+                });
+            })
+            .catch(err => {
+                console.error('Error writing CSV:', err);
+                res.status(500).json({ success: false, message: 'Error writing CSV.' });
+            });
+    });
+});
 // fetch volunteers
 app.get('/api/volunteers', async (req, res) => {
     try {

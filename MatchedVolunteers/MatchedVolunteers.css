@@ -1,0 +1,99 @@
+.header {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.header img {
+    height: 70px;
+    cursor: pointer;
+}
+.header nav {
+    margin-left: auto;
+}
+.header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 23px;
+}
+.header nav a:hover {
+    background-color: gray;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+}
+
+#matches-table {
+    margin: 0 auto;
+    width: 90%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #5077e2;
+}
+.button-container {
+    text-align: center; /* Centers buttons within the container */
+    margin-top: 50px; /* Adjust as needed to lower the buttons */
+}
+  
+  /* Styling for download-pdf button */
+.download-pdf {
+    background-color: #28e721; /* Change to your desired color */
+    color: white; /* Text color */
+    border: none;
+    padding: 10px 20px; /* Adjust size as needed */
+    border-radius: 5px; /* Optional: rounds corners */
+    cursor: pointer;
+    display: inline-block; /* Makes sure it's centered */
+    margin: 0 auto; /* Center the button if needed */
+}
+
+.download-pdf:hover {
+    background-color: #20b61b; /* Change to your desired hover color */
+  }
+  
+  /* Styling for download-csv button */
+.download-csv {
+    background-color: #f333e3; /* Change to your desired color */
+    color: white; /* Text color */
+    border: none;
+    padding: 10px 20px; /* Adjust size as needed */
+    border-radius: 5px; /* Optional: rounds corners */
+    cursor: pointer;
+    display: inline-block; /* Makes sure it's centered */
+    margin: 0 auto; /* Center the button if needed */
+}
+
+.download-csv:hover {
+    background-color: #be29b2; /* Change to your desired hover color */
+  }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+    border: 1px solid #000000;
+}
+
+th {
+    background-color: #5077e2;
+}
+
+tr:hover {
+    background-color: #eee454;
+}
